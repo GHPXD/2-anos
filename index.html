@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodas Dedo de Moça</title>
+    <style>
+        body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background: url(fundo.jpg) no-repeat ;
+                background-size: cover;
+            }
+
+            #anniversary-container {
+                text-align: center;
+                margin-top: 50px;
+            }
+
+            #photo-container,
+            #video-container {
+                width: 100%;
+                max-width: 150px;
+                margin: 0 auto;
+                border: 5px solid #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                margin-top: 20px;
+            }
+
+            #photo-container img,
+            #video-container video {
+                width: 100%;
+                height: auto;
+                transition: transform 1s ease-in-out;
+            }
+
+            #love-message {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 100%;
+                color: #333;
+                text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+            }
+
+            #message-letter, #love-U{
+                text-align: center;
+                margin-top: 20px;
+                font-size: 13px;
+                color: #333;
+                text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+                padding: 0 20px;
+
+            }
+
+            @media only screen and (min-width: 600px) {
+            /* Adjustments for tablets and larger screens */
+                #photo-container,
+                #video-container {
+                    width: 60%;
+                }
+            }
+            
+            #overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+                z-index: 2;
+            }
+
+            #expanded-photo {
+                max-width: 80%;
+                max-height: 80%;
+            }
+
+            #close-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: #fff;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+        #spotify-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #spotify-icon {
+            width: 70px;
+            height: 70px; 
+            margin-right: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #spotify-icon {
+                width: 50px;
+                height: 50px;
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="love-message">Feliz Aniversário de 2 anos, meu amor! 🎉❤️</h1>
+
+    <div id="anniversary-container">
+    <div id="photo-container">
+        <img src="1.jpg" alt="Aniversário de Namoro - Foto 1">
+    </div>
+
+    <h3 id="message-letter">
+        Meu amor,
+
+        Hoje é um dia muito especial, pois comemoramos nosso segundo aniversário de namoro. Parece que foi ontem que nos conhecemos, mas já passaram dois anos. Dois anos de muitas risadas, aventuras, desafios, descobertas, raiva, estresse, mais acima de tudo, amor.
+        Você é a pessoa mais incrível que eu já conheci. Seu sorriso ilumina meu dia, sua risada é a música mais bonita que já ouvi, alem de ficar muito mais linda, você deveria sempre sorrir, pois alem de disso, alegra meu coração junto e seu abraço é o lugar mais seguro do mundo. Eu sou tão grato por ter você na minha vida e por poder compartilhar cada momento com você.
+        Nesses dois anos, aprendi muito com você, você me ensinou a ver o mundo de uma maneira diferente e a apreciar as pequenas coisas da vida. Eu sou uma pessoa melhor por ter você ao meu lado.
+        Eu amo você mais do que palavras podem expressar. Espero que este aniversário de namoro seja apenas o começo de muitos anos maravilhosos juntos, rumo aos 25 ksskk. Eu prometo amar, cuidar e apoiar você em todos os momentos. Feliz aniversário de namoro, meu amor. 
+    </h3>
+    <h3 id="love-U">
+        Eu Te Amo muito Gatinha ❤️
+    </h3>
+    <!-- Box de vídeos -->
+    <div id="video-container">
+        <video controls>
+            <source src="1.mp4" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+        </video>
+    </div>
+
+    <div id="overlay">
+        <span id="close-button" onclick="closeOverlay()">&#10006;</span>
+        <img id="expanded-photo" src="" alt="Expanded Photo">
+    </div>
+
+    <h4>Crie nossa playlist de 2 anos</h4>
+    <a id="spotify-link" href="https://open.spotify.com/blend/taste-match/90d2eb308cca7ee5?si=1IxrWwodQpqMgAh8oQVI9w&fallback=getapp" target="_blank">
+        <img id="spotify-icon" src="spotify.png" alt="Spotify Icon">
+    </a>
+
+    <div id="overlay">
+        <span id="close-button" onclick="closeOverlay()">&#10006;</span>
+        <img id="expanded-photo" src="" alt="Expanded Photo">
+    </div>
+
+<script>
+    const photoContainer = document.getElementById('photo-container');
+    const overlay = document.getElementById('overlay');
+    const expandedPhoto = document.getElementById('expanded-photo');
+    const closeBtn = document.getElementById('close-button');
+    const photos = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg'];
+    let currentPhotoIndex = 0;
+    let isPaused = false;
+
+    function zoomPhoto() {
+        if (!isPaused) {
+            photoContainer.querySelector('img').style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+                photoContainer.querySelector('img').src = photos[currentPhotoIndex];
+                photoContainer.querySelector('img').style.transform = 'scale(1)';
+            }, 1000);
+        }
+    }
+
+    function openOverlay() {
+        const currentPhotoSrc = photos[currentPhotoIndex];
+        expandedPhoto.src = currentPhotoSrc;
+        overlay.style.display = 'flex';
+        isPaused = true;
+    }
+
+    function closeOverlay() {
+        overlay.style.display = 'none';
+        isPaused = false;
+    }
+
+    photoContainer.addEventListener('click', openOverlay);
+    closeBtn.addEventListener('click', closeOverlay);
+
+    setInterval(zoomPhoto, 3000);
+</script>
+
+</body>
+</html>
